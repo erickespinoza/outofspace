@@ -6,6 +6,10 @@ game.PlayScreen = me.ScreenObject.extend({
       //stuff to reset on state change
       //load a level
       me.levelDirector.loadLevel('area01');
+
+      me.game.addHUD(0,480,320,100);
+      me.game.HUD.addItem('score', new game.ScoreObject(50,10));
+      me.game.sort();
 	},
 	
 	
@@ -13,6 +17,6 @@ game.PlayScreen = me.ScreenObject.extend({
 	 *  action to perform when leaving this screen (state change)
 	 */
 	onDestroyEvent: function() {
-	  ; // TODO
+	  me.game.disableHUD();
 	}
 });

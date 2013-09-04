@@ -5,7 +5,7 @@ game.PlayerEntity = me.ObjectEntity.extend({
 	init:function(x, y, settings){
 		this.parent(x, y, settings);
 		this.gravity = 0;
-		this.setMaxVelocity(5, 5);
+		this.setMaxVelocity(3, 3);
 		this.renderable.addAnimation('idle',[ 0 ]);
 		this.renderable.addAnimation('walk',[1,2,3,4,5,6])
 		this.renderable.addAnimation('punch',[7,8]);
@@ -17,11 +17,8 @@ game.PlayerEntity = me.ObjectEntity.extend({
 	update
 	*/
 	update:function(){
-		// this.renderable.animationspeed = ;
-		// left / right movement
+			// left / right movement
 		if(me.input.isKeyPressed('left')){
-			//this.flipX(true);
-			//me.audio.play('walk');
 			this.vel.x -= 1;
 			this.bullet_direction = 'left';
 			this.renderable.angle = Number.prototype.degToRad(180);
@@ -29,8 +26,6 @@ game.PlayerEntity = me.ObjectEntity.extend({
 			this.parent(true);
 			this.updateColRect(10,20,0,30);
 		}else if(me.input.isKeyPressed('right')){
-			//me.audio.play('walk');
-			//this.flipX(false);
 			this.vel.x += 1;
 			this.bullet_direction = 'right';
 			this.renderable.angle = Number.prototype.degToRad(0);
@@ -39,13 +34,9 @@ game.PlayerEntity = me.ObjectEntity.extend({
 			this.updateColRect(3,20,0,30);
 		} else {
 			this.vel.x = 0;
-			// this.renderable.setCurrentAnimation('idle');
-			// this.parent(true);
 		}
 		// up / down movement
 		if(me.input.isKeyPressed('up')){
-			//me.audio.play('walk');
-			//this.flipY(true);
 			this.vel.y -= 1;
 			this.bullet_direction = 'up';
 			this.renderable.angle = Number.prototype.degToRad(270);
@@ -53,8 +44,6 @@ game.PlayerEntity = me.ObjectEntity.extend({
 			this.parent(true);
 			this.updateColRect(0,30,10,20);
 		}else if(me.input.isKeyPressed('down')){
-			//me.audio.play('walk');
-			//this.flipY(false);
 			this.vel.y += 1;
 			this.bullet_direction = 'down';
 			this.renderable.angle = Number.prototype.degToRad(90);
@@ -63,32 +52,21 @@ game.PlayerEntity = me.ObjectEntity.extend({
 			this.updateColRect(0,30,3,20);
 		} else {
 			this.vel.y = 0;
-			//this.renderable.setCurrentAnimation('idle');
 		}
 		if(me.input.isKeyPressed('shoot')){
 			me.audio.play('shoot')
-			var shot = new ShotEntity(this.pos.x, this.pos.y, {image:'bullet',spritewidth:'10',spriteheight:'10'},this.bullet_direction);
+			var shot = new ShotEntity(this.pos.x+10, this.pos.y, {image:'bullet',spritewidth:'10',spriteheight:'10'},this.bullet_direction);
 			me.game.add(shot, this.z);
 			me.game.sort();
 		}
 
 		//this.renderable.setCurrentAnimation('punch');
 		if(me.input.isKeyPressed('punch')){
-			//this.renderable.animationspeed = 5;
-			//this.renderable.image = me.loader.getImage('punch');
-			//if(this.renderable.getCurrentAnimationFrame()==3){
-				//alert('punch');
-				//this.isAttacking = true;
-			//}
+			this.updateColRect(0,32,0,32);
 			this.isAttacking = true;
-			this.renderable.setCurrentAnimation('punch',function(){
-				//console.log(this);
-				//this.setCurrentAnimation('idle');
-			});
+			this.renderable.setCurrentAnimation('punch');
 			this.parent(true);
 		}else{
-			//this.renderable.image = me.loader.getImage('user');
-			//this.renderable.setCurrentAnimation('idle');
 			this.isAttacking = false;
 		}
 		var res = me.game.collide(this);
@@ -99,25 +77,29 @@ game.PlayerEntity = me.ObjectEntity.extend({
 		//check & update player movement
 		this.updateMovement();
 
-		//update animation if necesary
-		// if(this.vel.x !=0 || this.vel.y !=0){
-		// 	this.parent();
-		// 	return true;
-		// }
+		
 		return true;
 	},
 	onCollision:function(res, obj){
-		//console.log(obj.type);
 		if(obj.type == 1 && !this.isAttacking){
-			me.audio.play('userdie');
-			//me.state.change(me.state.PLAY);
-			me.state.change(me.state.GAMEOVER);
-			//me.game.HUD.updateItemValue('lives',-1);
+			
+			var blood = new BloodEntity(this.pos.x, this.pos.y, {image:'bloodU', spritewidth:32, spriteheight: 32});
+			me.game.add(blood, 5);
+			me.game.sort();
+			
+			me.input.unbindKey(me.input.KEY.LEFT);
+		    me.input.unbindKey(me.input.KEY.RIGHT);
+		    me.input.unbindKey(me.input.KEY.UP);
+		    me.input.unbindKey(me.input.KEY.DOWN);
+		    me.input.unbindKey(me.input.KEY.Z);
+		    me.input.unbindKey(me.input.KEY.X);
+			me.audio.play('userdie',false,function(){
+				me.state.change(me.state.GAMEOVER);
+			});
 		}
 	}
 });
-
-
+//Shot entity 
 var ShotEntity = me.ObjectEntity.extend({
 	init:function(x, y, settings, direction){
 		this.parent(x, y, settings);
@@ -181,74 +163,12 @@ var ShotEntity = me.ObjectEntity.extend({
 		return true;
 	}
 });
-
-// var ShotEnemyEntity = me.ObjectEntity.extend({
-// 	init:function(x, y, settings, direction){
-// 		this.parent(x, y, settings);
-// 		switch(direction){
-// 			case 'left':
-// 			this.setVelocity(2,0);
-// 			break;
-// 			case 'right':
-// 			this.setVelocity(2,0);
-// 			break;
-// 			case 'up':
-// 			this.setVelocity(0,2);
-// 			break;
-// 			case 'down':
-// 			this.setVelocity(0,2);
-// 			break;
-// 			default:
-// 			this.setVelocity(0,2);
-// 			break;
-// 		}
-		
-// 		this.gravity = 0;
-// 		this.starX = x;
-// 		this.endX = x + 300;
-// 		this.direction = direction;
-// 		this.collidable = true;
-// 		this.type = 5;
-		
-// 	},
-// 	update: function(){
-// 		if(!this.inViewport){
-// 			return false;
-// 			me.game.remove(this);
-// 		}	
-// 		switch(this.direction){
-// 			case 'left':
-// 			this.vel.x -= 1;
-// 			break;
-// 			case 'right':
-// 			this.vel.x += 1;
-// 			break;
-// 			case 'up':
-// 			this.vel.y -= 1;
-// 			break;
-// 			case 'down':
-// 			this.vel.y += 1;
-// 			break;
-// 			default:
-// 			this.vel.y += 1;
-// 			break;
-// 		}
-// 		var res = me.game.collide(this);
-// 		if(res){
-			
-// 			if(res.obj.type == 0){
-// 				console.log(res.obj.isAttacking);
-// 			}
-// 		}
-// 		this.updateMovement();
-// 		return true;
-// 	}
-// });
-
+//Enemy Entity that follows the user
 game.EnemyEntityUp = me.ObjectEntity.extend({
 	init:function(x, y, settings){
 		this.parent(x, y, settings);
-		this.setVelocity(2,2);
+		//this.setVelocity(0.5,0.5);
+		this.setMaxVelocity(3,3);
 		this.gravity = 0;
 		this.type = me.game.ENEMY_OBJECT;
 		this.collidable = true;
@@ -257,6 +177,7 @@ game.EnemyEntityUp = me.ObjectEntity.extend({
 		this.renderable.addAnimation('die',[3]);
 		this.moveX = 0;
 		this.moveY = 0;
+		this.updateColRect(3,30,0,10);
 		
 	},
 	update:function(){
@@ -271,42 +192,30 @@ game.EnemyEntityUp = me.ObjectEntity.extend({
 			this.distanceY = player.pos.y - this.pos.y;
 			this.distanceTotal = Math.sqrt(this.distanceX * this.distanceX + this.distanceY * this.distanceY);
 			
-			if(this.distanceTo(player)<100){
-				this.moveDistanceX = 0.05 * this.distanceX / this.distanceTotal;
-				this.moveDistanceY = 0.05 * this.distanceY / this.distanceTotal;
+			if(this.distanceTo(player)<150){
+				this.moveDistanceX = 0.01 * this.distanceX / this.distanceTotal;
+				this.moveDistanceY = 0.01 * this.distanceY / this.distanceTotal;
 				this.moveX += this.moveDistanceX;
 				this.moveY += this.moveDistanceY;
 
 				this.totalmove = Math.sqrt(this.moveX * this.moveX + this.moveX * this.moveX);
-				this.moveX = 0.5 * this.moveX / this.totalmove;
-				this.moveY = 0.5 * this.moveY / this.totalmove;
+				this.moveX = 1 * this.moveX / this.totalmove;
+				this.moveY = 1 * this.moveY / this.totalmove;
 				this.pos.x += this.moveX;
 				this.pos.y += this.moveY;
-				// this.vel.x += Math.sin(this.angleTo(player))*this.distanceTo(player)/100;
-				// this.vel.y += Math.cos(this.angleTo(player)+180)*this.distanceTo(player)/100;
-				
-				 // var shot = new ShotEnemyEntity(this.pos.x, this.pos.y, {image:'bullet',spritewidth:'16',spriteheight:'16'},'up');
-				 // me.game.add(shot, this.z);
-				 // me.game.sort();
-				 this.renderable.setCurrentAnimation('walk');
-				 this.parent(true);
+				this.renderable.setCurrentAnimation('walk');
+				this.parent(true);
 
 			}else{
-				// this.vel.x = 0;
-				// this.vel.y = 0;
 				this.renderable.setCurrentAnimation('idle');
 				this.parent(true);
 			}
-			// else if(this.distanceTo(player) == 0){
-			// 	this.vel.y = 0;
-			// }else{
-			// 	this.vel.y = 0;
-			// }
+			
 		}
 		var res = me.game.collide(this);
 		if(res){	
 			if(res.obj.type == 0){
-				//me.game.remove(this);
+				
 			}
 		}
 		this.updateMovement();
@@ -319,7 +228,6 @@ game.EnemyEntityUp = me.ObjectEntity.extend({
 	onCollision: function(res, obj){
 		
 		if(obj.type == 3){
-			//this.alive = false;
 			me.audio.play('enemydie');
 			me.game.remove(this);
 			var blood = new BloodEntity(this.pos.x, this.pos.y, {image:'blood', spritewidth:32, spriteheight: 32});
@@ -339,6 +247,7 @@ game.EnemyEntityUp = me.ObjectEntity.extend({
 		}
 	}
 });
+// Blood when user or enemy day Object
 var BloodEntity = me.ObjectEntity.extend({
 	init:function(x, y, settings){
 		this.parent(x, y, settings);
@@ -346,12 +255,7 @@ var BloodEntity = me.ObjectEntity.extend({
 		this.collidable = false;
 	}
 });
-// var Playerpunch = me.ObjectEntity.extend({
-// 	init:function(x,y, settings){
-// 		this.parent(x,y, settings);
-// 		this.gravity = 0;
-// 	}
-// });
+//ScoreOject
 game.ScoreObject = me.HUD_Item.extend({
 	init:function(x, y){
 		this.parent(x, y);

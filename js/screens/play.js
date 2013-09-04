@@ -16,7 +16,13 @@ game.PlayScreen = me.ScreenObject.extend({
       me.game.HUD.setItemValue('score_title','SCORE:');
       //me.game.HUD.setItemValue('lives_title','LIVES:');
       //me.game.HUD.setItemValue('lives',3);
-      me.audio.playTrack("background2",0.4);
+      //me.audio.playTrack("background2",0.4);
+  	me.input.bindKey(me.input.KEY.LEFT, 'left');
+    me.input.bindKey(me.input.KEY.RIGHT, 'right');
+    me.input.bindKey(me.input.KEY.UP, 'up');
+    me.input.bindKey(me.input.KEY.DOWN, 'down');
+    me.input.bindKey(me.input.KEY.Z, 'shoot',true);
+    me.input.bindKey(me.input.KEY.X, 'punch');
 	},
 	
 	
@@ -27,6 +33,12 @@ game.PlayScreen = me.ScreenObject.extend({
 	  me.game.disableHUD();
 
 	  me.audio.stopTrack();
+		me.input.unbindKey(me.input.KEY.LEFT);
+	    me.input.unbindKey(me.input.KEY.RIGHT);
+	    me.input.unbindKey(me.input.KEY.UP);
+	    me.input.unbindKey(me.input.KEY.DOWN);
+	    me.input.unbindKey(me.input.KEY.Z);
+	    me.input.unbindKey(me.input.KEY.X);
 	}
 });
 
@@ -77,7 +89,7 @@ game.TitleScreen = me.ScreenObject.extend({
 	},
 	onDestroyEvent:function(){
 		me.input.unbindKey(me.input.KEY.ENTER);
-		me.audio.stopTrack("background",0.4);
+		//me.audio.stopTrack("background",0.4);
 
 	}
 });

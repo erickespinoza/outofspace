@@ -29,6 +29,8 @@
   </object>
   <object name="me.LevelEntity" x="2046" y="229" width="35" height="92">
    <properties>
+    <property name="duration" value="1000"/>
+    <property name="fade" value="#000000"/>
     <property name="to" value="area02"/>
    </properties>
   </object>
@@ -118,7 +120,7 @@
     <property name="spritewidth" value="32"/>
    </properties>
   </object>
-  <object name="enemyUp" x="1331" y="910">
+  <object name="enemyUp" x="1361" y="908">
    <properties>
     <property name="image" value="enemyUp"/>
     <property name="spriteheight" value="32"/>

@@ -57,6 +57,7 @@ game.PlayerEntity = me.ObjectEntity.extend({
 			me.audio.play('shoot')
 			var shot = new ShotEntity(this.pos.x+10, this.pos.y, {image:'bullet',spritewidth:'10',spriteheight:'10'},this.bullet_direction);
 			me.game.add(shot, this.z);
+			shot.renderable.angle = this.renderable.angle;
 			me.game.sort();
 		}
 
@@ -173,8 +174,7 @@ game.EnemyEntityUp = me.ObjectEntity.extend({
 		this.type = me.game.ENEMY_OBJECT;
 		this.collidable = true;
 		this.renderable.addAnimation('idle',[0]);
-		this.renderable.addAnimation('walk',[1,2]);
-		this.renderable.addAnimation('die',[3]);
+		this.renderable.addAnimation('walk',[1,2,3,4,5,6]);
 		this.moveX = 0;
 		this.moveY = 0;
 		this.updateColRect(3,30,0,10);

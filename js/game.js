@@ -40,12 +40,12 @@ var game = {
         me.entityPool.add('player', game.PlayerEntity);
         me.entityPool.add('enemyUp', game.EnemyEntityUp);
 
-        me.input.bindKey(me.input.KEY.LEFT, 'left');
-        me.input.bindKey(me.input.KEY.RIGHT, 'right');
-        me.input.bindKey(me.input.KEY.UP, 'up');
-        me.input.bindKey(me.input.KEY.DOWN, 'down');
-        me.input.bindKey(me.input.KEY.Z, 'shoot',true);
-        me.input.bindKey(me.input.KEY.X, 'punch');
+        // me.input.bindKey(me.input.KEY.LEFT, 'left');
+        // me.input.bindKey(me.input.KEY.RIGHT, 'right');
+        // me.input.bindKey(me.input.KEY.UP, 'up');
+        // me.input.bindKey(me.input.KEY.DOWN, 'down');
+        // me.input.bindKey(me.input.KEY.Z, 'shoot',true);
+        // me.input.bindKey(me.input.KEY.X, 'punch');
         //me.debug.renderHitBox = true;
         // Start the game.
         me.state.change(me.state.MENU);

@@ -4,10 +4,11 @@ game.resources = [
 	 Graphics
 	 */
 	 {name: 'area01_level_tiles', type:'image', src:'data/img/map/area01_level_tiles.png'},
+	 {name: 'halo_p1ver1_0_sprtesheet', type:'image', src:'data/img/map/halo_p1ver1_0_sprtesheet.gif'},
 	 {name: 'plat01', type:'image', src:'data/img/map/plat01.png'},
-	 {name: 'user', type:'image', src:'data/img/sprites/user_2.png'},
+	 {name: 'user', type:'image', src:'data/img/sprites/user_3.png'},
 	 {name: 'bullet', type:'image',src:'data/img/sprites/bullet_2.png'},
-	 {name: 'enemyUp', type:'image', src:'data/img/sprites/enemy_1.png'},
+	 {name: 'enemyUp', type:'image', src:'data/img/sprites/enemy_2.png'},
 	 {name: '16x16_font', type:'image', src:'data/img/font/16x16_font.png'},
 	 {name: 'bloodU', type: 'image', src: 'data/img/sprites/blood.png'},
 	 {name: 'blood', type:'image', src:'data/img/sprites/blood_1.png'},
@@ -21,7 +22,7 @@ game.resources = [
 	 Map
 	 */
 	 {name: 'area01', type:'tmx', src:'data/map/Area001.tmx'},
-	 {name: 'area02', type:'tmx', src:'data/map/Area001.tmx'},
+	 {name: 'area02', type:'tmx', src:'data/map/Area002.tmx'},
 	 /*
 	 Sound
 	 */

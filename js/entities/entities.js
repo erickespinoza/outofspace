@@ -255,6 +255,8 @@ game.EnemyEntityUp = me.ObjectEntity.extend({
 		this.renderable.addAnimation('idle',[0]);
 		this.renderable.addAnimation('walk',[1,2]);
 		this.renderable.addAnimation('die',[3]);
+		this.moveX = 0;
+		this.moveY = 0;
 		
 	},
 	update:function(){
@@ -265,12 +267,24 @@ game.EnemyEntityUp = me.ObjectEntity.extend({
 		if(this.alive){
 			var player = me.game.getEntityByName("player")[0];
 			this.renderable.angle = this.angleTo(player);
+			this.distanceX = player.pos.x - this.pos.x;
+			this.distanceY = player.pos.y - this.pos.y;
+			this.distanceTotal = Math.sqrt(this.distanceX * this.distanceX + this.distanceY * this.distanceY);
+			
 			if(this.distanceTo(player)<100){
-				//console.log('angle '+this.angleTo(player));
-				//console.log('move');
-				//alert(Math.cos(Number.prototype.radToDeg(player.renderable.angle+Math.PI)));
-				this.vel.x += Math.sin(Number.prototype.radToDeg(player.renderable.angle-Math.PI))*this.distanceTo(player);
-				this.vel.y += Math.cos(Number.prototype.radToDeg(player.renderable.angle-Math.PI))*this.distanceTo(player);
+				this.moveDistanceX = 0.05 * this.distanceX / this.distanceTotal;
+				this.moveDistanceY = 0.05 * this.distanceY / this.distanceTotal;
+				this.moveX += this.moveDistanceX;
+				this.moveY += this.moveDistanceY;
+
+				this.totalmove = Math.sqrt(this.moveX * this.moveX + this.moveX * this.moveX);
+				this.moveX = 0.5 * this.moveX / this.totalmove;
+				this.moveY = 0.5 * this.moveY / this.totalmove;
+				this.pos.x += this.moveX;
+				this.pos.y += this.moveY;
+				// this.vel.x += Math.sin(this.angleTo(player))*this.distanceTo(player)/100;
+				// this.vel.y += Math.cos(this.angleTo(player)+180)*this.distanceTo(player)/100;
+				
 				 // var shot = new ShotEnemyEntity(this.pos.x, this.pos.y, {image:'bullet',spritewidth:'16',spriteheight:'16'},'up');
 				 // me.game.add(shot, this.z);
 				 // me.game.sort();
@@ -278,8 +292,8 @@ game.EnemyEntityUp = me.ObjectEntity.extend({
 				 this.parent(true);
 
 			}else{
-				this.vel.x = 0;
-				this.vel.y = 0;
+				// this.vel.x = 0;
+				// this.vel.y = 0;
 				this.renderable.setCurrentAnimation('idle');
 				this.parent(true);
 			}

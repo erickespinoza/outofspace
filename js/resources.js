@@ -6,7 +6,7 @@ game.resources = [
 	 {name: 'area01_level_tiles', type:'image', src:'data/img/map/area01_level_tiles.png'},
 	 {name: 'plat01', type:'image', src:'data/img/map/plat01.png'},
 	 {name: 'user', type:'image', src:'data/img/sprites/user_2.png'},
-	 {name: 'bullet', type:'image',src:'data/img/sprites/bullet_2.png'},
+	 {name: 'bullet', type:'image',src:'data/img/sprites/bullet.png'},
 	 {name: 'enemyUp', type:'image', src:'data/img/sprites/enemy_1.png'},
 	 {name: '16x16_font', type:'image', src:'data/img/font/16x16_font.png'},
 	 {name: 'blood', type:'image', src:'data/img/sprites/blood_1.png'},

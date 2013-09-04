@@ -16,7 +16,7 @@ game.PlayScreen = me.ScreenObject.extend({
       me.game.HUD.setItemValue('score_title','SCORE:');
       //me.game.HUD.setItemValue('lives_title','LIVES:');
       //me.game.HUD.setItemValue('lives',3);
-      //me.audio.playTrack("background2",0.4);
+      me.audio.playTrack("background2",0.4);
 	},
 	
 	
@@ -65,7 +65,7 @@ game.TitleScreen = me.ScreenObject.extend({
 			this.title = me.loader.getImage('menu');
 		}
 		me.input.bindKey(me.input.KEY.ENTER, "enter", true);
-		//me.audio.playTrack("background",0.4);
+		me.audio.playTrack("background",0.4);
 	},
 	draw: function(context){
 		context.drawImage(this.title,0,0);

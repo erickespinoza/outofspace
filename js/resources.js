@@ -1,41 +1,33 @@
 game.resources = [
 
-	/* Graphics. 
-	 * @example
-	 * {name: "example", type:"image", src: "data/img/example.png"},
-	 */
-	
-	/* Atlases 
-	 * @example
-	 * {name: "example_tps", type: "tps", src: "data/img/example_tps.json"},
-	 */
-		
-	/* Maps. 
-	 * @example
-	 * {name: "example01", type: "tmx", src: "data/map/example01.tmx"},
-	 * {name: "example01", type: "tmx", src: "data/map/example01.json"},
- 	 */
-
-	/* Background music. 
-	 * @example
-	 * {name: "example_bgm", type: "audio", src: "data/bgm/", channel : 1},
-	 */	
-	
-	/* Sound effects. 
-	 * @example
-	 * {name: "example_sfx", type: "audio", src: "data/sfx/", channel : 2}
-	 */
-
 	 /*
 	 Graphics
 	 */
 	 {name: 'area01_level_tiles', type:'image', src:'data/img/map/area01_level_tiles.png'},
-	 {name: 'user', type:'image', src:'data/img/sprites/user.png'},
-	 {name: 'bullet', type:'image',src:'data/img/sprites/bullet.png'},
-	 {name: 'enemyUp', type:'image', src:'data/img/sprites/enemyUp.png'},
+	 {name: 'plat01', type:'image', src:'data/img/map/plat01.png'},
+	 {name: 'user', type:'image', src:'data/img/sprites/user_2.png'},
+	 {name: 'bullet', type:'image',src:'data/img/sprites/bullet_2.png'},
+	 {name: 'enemyUp', type:'image', src:'data/img/sprites/enemy_1.png'},
 	 {name: '16x16_font', type:'image', src:'data/img/font/16x16_font.png'},
+	 {name: 'blood', type:'image', src:'data/img/sprites/blood_1.png'},
+	 {name: 'punch', type:'image', src: 'data/img/sprites/user_punsh_1.png'},
+	 {name: 'over', type:'image', src: 'data/img/ui/game_over.png'},
+	 {name: 'menu', type:'image', src: 'data/img/ui/menu.png'},
+	 {name: 'oos-tileset', type:'image', src: 'data/img/map/oos-tileset.png'},
+	 {name: 'spaceships-sprite-1', type:'image', src: 'data/img/map/spaceships-sprite-1.png'},
+	 {name: 'Plantilla-ecenarios', type:'image', src: 'data/img/map/Plantilla-ecenarios.jpg'},
 	 /*
 	 Map
 	 */
-	 {name: 'area01', type:'tmx', src:'data/map/area01.tmx'}
+	 {name: 'area01', type:'tmx', src:'data/map/Area001.tmx'},
+	 {name: 'area02', type:'tmx', src:'data/map/Area001.tmx'},
+	 /*
+	 Sound
+	 */
+	  {name: "background", type: "audio", src: "data/bgm/", channel : 1},
+	  {name: 'background2', type: 'audio', src:'data/bgm/', channel: 1},
+	  {name: 'shoot', type:'audio', src: 'data/sfx/', channel: 2},
+	  {name: 'walk', type:'audio', src: 'data/sfx/', channel: 2},
+	  {name: 'userdie', type:'audio', src: 'data/sfx/', channel: 2},
+	  {name: 'enemydie', type:'audio', src: 'data/sfx/', channel: 2}
 ];

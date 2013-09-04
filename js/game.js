@@ -35,6 +35,7 @@ var game = {
     "loaded" : function () {
         me.state.set(me.state.MENU, new game.TitleScreen());
         me.state.set(me.state.PLAY, new game.PlayScreen());
+        me.state.set(me.state.GAMEOVER, new game.OverScreen());
 
         me.entityPool.add('player', game.PlayerEntity);
         me.entityPool.add('enemyUp', game.EnemyEntityUp);
@@ -44,8 +45,9 @@ var game = {
         me.input.bindKey(me.input.KEY.UP, 'up');
         me.input.bindKey(me.input.KEY.DOWN, 'down');
         me.input.bindKey(me.input.KEY.Z, 'shoot',true);
-
+        me.input.bindKey(me.input.KEY.X, 'punch');
+        //me.debug.renderHitBox = true;
         // Start the game.
-        me.state.change(me.state.PLAY);
+        me.state.change(me.state.MENU);
     }
 };

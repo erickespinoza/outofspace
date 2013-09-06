@@ -23,6 +23,8 @@ game.PlayScreen = me.ScreenObject.extend({
       me.input.bindKey(me.input.KEY.DOWN, 'down');
       me.input.bindKey(me.input.KEY.Z, 'shoot',true);
       me.input.bindKey(me.input.KEY.X, 'punch');
+      this.mobile_ui = new game.UI();
+      me.game.add(this.mobile_ui, Infinity);
 	},
 	
 	
@@ -53,6 +55,7 @@ game.OverScreen = me.ScreenObject.extend({
 			this.title = me.loader.getImage('over');
 		}
 		me.input.bindKey(me.input.KEY.ENTER, "enter", true);
+		me.input.bindTouch(me.input.KEY.ENTER);
 	},
 	draw:function(context){
 		context.drawImage(this.title, 0, 0);

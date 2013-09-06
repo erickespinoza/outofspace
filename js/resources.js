@@ -18,6 +18,8 @@ game.resources = [
 	 {name: 'oos-tileset', type:'image', src: 'data/img/map/oos-tileset.png'},
 	 {name: 'spaceships-sprite-1', type:'image', src: 'data/img/map/spaceships-sprite-1.png'},
 	 {name: 'Plantilla-ecenarios', type:'image', src: 'data/img/map/Plantilla-ecenarios.jpg'},
+	 {name: 'ui-dpad', type:'image', src: 'data/img/ui/ui-dpad.png'},
+	 {name: 'ui-button', type:'image', src: 'data/img/ui/ui-button.png'},
 	 /*
 	 Map
 	 */

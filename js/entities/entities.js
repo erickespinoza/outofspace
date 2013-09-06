@@ -326,7 +326,7 @@ game.Triangle = Object.extend({
 
 game.UI = me.Renderable.extend({
     "init" : function () {
-        this.parent(new me.Vector2d(35, 395), 870, 220);
+        this.parent(new me.Vector2d(35, 200), 870, 220);
         this.isPersistent = true;
         this.floating = true;
 
@@ -337,28 +337,28 @@ game.UI = me.Renderable.extend({
         var buttons = this.buttons = {
             // Directional pad
             "up"    : new game.Triangle(
-                new me.Vector2d(140, 500),
-                new me.Vector2d(-20, 360),
-                new me.Vector2d(300, 360)
+                new me.Vector2d(90, 250),
+                new me.Vector2d(10, 160),
+                new me.Vector2d(150, 160)
             ),
             "down"  : new game.Triangle(
-                new me.Vector2d(140, 500),
-                new me.Vector2d(300, 640),
-                new me.Vector2d(-20, 640)
+                new me.Vector2d(90, 250),
+                new me.Vector2d(150, 340),
+                new me.Vector2d(10, 340)
             ),
             "left"  : new game.Triangle(
-                new me.Vector2d(140, 500),
-                new me.Vector2d(0, 660),
-                new me.Vector2d(0, 340)
+                new me.Vector2d(90, 250),
+                new me.Vector2d(10, 340),
+                new me.Vector2d(10, 160)
             ),
             "right" : new game.Triangle(
-                new me.Vector2d(140, 500),
-                new me.Vector2d(280, 340),
-                new me.Vector2d(280, 660)
+                new me.Vector2d(90, 250),
+                new me.Vector2d(150, 160),
+                new me.Vector2d(150, 340)
             ),
             // Action buttons
-            "b"     : new me.Rect(new me.Vector2d(690, 460), 80, 80),
-            "a"     : new me.Rect(new me.Vector2d(810, 460), 80, 80)
+            "b"     : new me.Rect(new me.Vector2d(346, 256), 40, 40),
+            "a"     : new me.Rect(new me.Vector2d(400, 256), 40, 40)
         };
 
         // Set keys
@@ -431,9 +431,9 @@ console.log("mouseup", e);
     },
 
     "draw" : function (context) {
-        context.drawImage(this.dpad, 35, 395);
-        context.drawImage(this.button, 686, 456);
-        context.drawImage(this.button, 806, 456);
+        context.drawImage(this.dpad, 35, 200);
+        context.drawImage(this.button, 346, 256);
+        context.drawImage(this.button, 400, 256);
 
         if (me.debug.renderHitBox) {
             this.buttons.up.draw(context, "#00f");

@@ -23,8 +23,12 @@ game.PlayScreen = me.ScreenObject.extend({
       me.input.bindKey(me.input.KEY.DOWN, 'down');
       me.input.bindKey(me.input.KEY.Z, 'shoot',true);
       me.input.bindKey(me.input.KEY.X, 'punch');
-      this.mobile_ui = new game.UI();
-      me.game.add(this.mobile_ui, Infinity);
+      // Mobile UI
+        this.mobile_ui = null;
+        if (me.sys.isMobile ) {
+            this.mobile_ui = new game.UI();
+            me.game.add(this.mobile_ui, Infinity);
+        }
 	},
 	
 	
@@ -41,6 +45,11 @@ game.PlayScreen = me.ScreenObject.extend({
 	    me.input.unbindKey(me.input.KEY.DOWN);
 	    me.input.unbindKey(me.input.KEY.Z);
 	    me.input.unbindKey(me.input.KEY.X);
+	    // Disable mobile UI
+        if (this.mobile_ui) {
+            me.game.remove(this.mobile_ui, true);
+            this.mobile_ui = null;
+        }
 	}
 });
 
@@ -80,6 +89,7 @@ game.TitleScreen = me.ScreenObject.extend({
 			this.title = me.loader.getImage('menu');
 		}
 		me.input.bindKey(me.input.KEY.ENTER, "enter", true);
+		me.input.bindTouch(me.input.KEY.ENTER);
 		me.audio.playTrack("background",0.4);
 	},
 	draw: function(context){

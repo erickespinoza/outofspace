@@ -4,7 +4,7 @@ game.resources = [
 	 Graphics
 	 */
 	 {name: 'area01_level_tiles', type:'image', src:'data/img/map/area01_level_tiles.png'},
-	 {name: 'halo_p1ver1_0_sprtesheet', type:'image', src:'data/img/map/halo_p1ver1_0_sprtesheet.gif'},
+	 {name: 'halo_p1ver1_0_sprtesheet', type:'image', src:'data/img/map/machine.png'},
 	 {name: 'plat01', type:'image', src:'data/img/map/plat01.png'},
 	 {name: 'user', type:'image', src:'data/img/sprites/user_3.png'},
 	 {name: 'bullet', type:'image',src:'data/img/sprites/bullet_3.png'},

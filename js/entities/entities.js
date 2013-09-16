@@ -132,8 +132,9 @@ var ShotEntity = me.ObjectEntity.extend({
 	},
 	update: function(){
 		if(!this.inViewport){
-			return false;
 			me.game.remove(this);
+			return false;
+			
 		}	
 		switch(this.direction){
 			case 'left':
@@ -198,11 +199,24 @@ game.EnemyEntityUp = me.ObjectEntity.extend({
 				this.moveX += this.moveDistanceX;
 				this.moveY += this.moveDistanceY;
 
-				this.totalmove = Math.sqrt(this.moveX * this.moveX + this.moveX * this.moveX);
+				this.totalmove = Math.sqrt(this.moveX * this.moveX + this.moveY * this.moveY);
 				this.moveX = 1 * this.moveX / this.totalmove;
 				this.moveY = 1 * this.moveY / this.totalmove;
+				if(this.moveX < -1){
+					this.moveX = -1;
+				}else if(this.moveX > 1){
+					this.moveX = 1;
+				}
+
+				if(this.moveY < -1){
+					this.moveY = -1;
+				}else if(this.moveY > 1){
+					this.moveY = 1;
+				}
 				this.pos.x += this.moveX;
 				this.pos.y += this.moveY;
+				
+				this.updateMovement();
 				this.renderable.setCurrentAnimation('walk');
 				this.parent(true);
 
@@ -214,9 +228,8 @@ game.EnemyEntityUp = me.ObjectEntity.extend({
 		}
 		var res = me.game.collide(this);
 		if(res){	
-			if(res.obj.type == 0){
-				
-			}
+			
+			
 		}
 		this.updateMovement();
 		if(this.vel.x !=0 || this.vel.y !=0){
@@ -226,6 +239,7 @@ game.EnemyEntityUp = me.ObjectEntity.extend({
 		return false;
 	},
 	onCollision: function(res, obj){
+		console.log(obj.isEntity);
 		
 		if(obj.type == 3){
 			me.audio.play('enemydie');

@@ -169,8 +169,8 @@ var ShotEntity = me.ObjectEntity.extend({
 game.EnemyEntityUp = me.ObjectEntity.extend({
 	init:function(x, y, settings){
 		this.parent(x, y, settings);
-		//this.setVelocity(0.5,0.5);
-		this.setMaxVelocity(3,3);
+		this.setVelocity(0.5,0.5);
+		this.setMaxVelocity(2,2);
 		this.gravity = 0;
 		this.type = me.game.ENEMY_OBJECT;
 		this.collidable = true;
@@ -200,8 +200,8 @@ game.EnemyEntityUp = me.ObjectEntity.extend({
 				this.moveY += this.moveDistanceY;
 
 				this.totalmove = Math.sqrt(this.moveX * this.moveX + this.moveY * this.moveY);
-				this.moveX = 1 * this.moveX / this.totalmove;
-				this.moveY = 1 * this.moveY / this.totalmove;
+				this.moveX = 0.03 * this.moveX / this.totalmove;
+				this.moveY = 0.03 * this.moveY / this.totalmove;
 				if(this.moveX < -1){
 					this.moveX = -1;
 				}else if(this.moveX > 1){
@@ -213,8 +213,10 @@ game.EnemyEntityUp = me.ObjectEntity.extend({
 				}else if(this.moveY > 1){
 					this.moveY = 1;
 				}
-				this.pos.x += this.moveX;
-				this.pos.y += this.moveY;
+				this.vel.x += this.moveX;
+				this.vel.y += this.moveY;
+				// this.pos.x += this.moveX;
+				// this.pos.y += this.moveY;
 				
 				this.updateMovement();
 				this.renderable.setCurrentAnimation('walk');

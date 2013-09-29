@@ -161,6 +161,15 @@ var ShotEntity = me.ObjectEntity.extend({
 				me.game.remove(this);
 			}
 		}
+
+		var collision = this.updateMovement();
+		if(collision.y && collision.yprop.isSolid){
+			me.game.remove(this);
+		}
+		if(collision.x && collision.xprop.isSolid){
+			me.game.remove(this);
+		}
+
 		this.updateMovement();
 		return true;
 	}
